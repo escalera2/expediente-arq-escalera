@@ -1,4 +1,4 @@
-````markdown
+
 # Práctica C4: Principios SOLID (S - Single Responsibility & O - Open/Closed)
 
 ## 1. Identificación y Solución de Clase Gorda (Principio S - SRP)
@@ -7,7 +7,7 @@
 
 En el modelo inicial legado (`treserva`), la clase `ReservaGuia` acumulaba múltiples responsabilidades violando el principio de **Single Responsibility (SRP)**:
 
-- Gestión física de bultos (dimensiones, cubicaje $GW/VW$, apilabilidad).
+- Gestión física de bultos (dimensiones, cubicaje GW/VW, apilabilidad).
 - Lógica financiera (cálculo de precios, tarifas y sobrecargas).
 - Seguimiento de estado y auditoría.
 
@@ -24,8 +24,8 @@ classDiagram
         +calcularCostoTotal()
         +registrarEvento()
     }
+
 ```
-````
 
 ### El Después (Refactorización SRP Aplicada)
 
@@ -69,9 +69,5 @@ classDiagram
 
 ## 2. Justificación de los Principios Aplicados
 
-- **Principio S (Single Responsibility):** Cada clase tiene una sola área de impacto (`DetalleBulto` para Bodega, `Tarifario` para Finanzas, `SeguimientoEstado` para Atención al Cliente y `ReservaGuia` para la Operación del Contrato).
-- **Principio O (Open/Closed):** Las tarifas y recargos pueden extenderse añadiendo nuevos tipos en `CargoAdicional` o escalas en `TarifaEscala` sin alterar la estructura base de `ReservaGuia`.
-
-```
-
-```
+* **Principio S (Single Responsibility):** Cada clase tiene una sola área de impacto (`DetalleBulto` para Bodega, `Tarifario` para Finanzas, `SeguimientoEstado` para Atención al Cliente y `ReservaGuia` para la Operación del Contrato).
+* **Principio O (Open/Closed):** Las tarifas y recargos pueden extenderse añadiendo nuevos tipos en `CargoAdicional` o escalas en `TarifaEscala` sin alterar la estructura base de `ReservaGuia`.
