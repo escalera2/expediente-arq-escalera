@@ -72,17 +72,6 @@ classDiagram
 - **Principio S (Single Responsibility):** Cada clase tiene una sola área de impacto (`DetalleBulto` para Bodega, `Tarifario` para Finanzas, `SeguimientoEstado` para Atención al Cliente y `ReservaGuia` para la Operación del Contrato).
 - **Principio O (Open/Closed):** Las tarifas y recargos pueden extenderse añadiendo nuevos tipos en `CargoAdicional` o escalas en `TarifaEscala` sin alterar la estructura base de `ReservaGuia`.
 
-````
+```
 
----
-
-### Pasos para guardar y enviar a GitHub:
-
-1. Guarda el archivo en VS Code (`Ctrl + S`).
-2. Ejecuta en tu terminal:
-   ```bash
-   git add practicas/c4/
-   git commit -m "docs(c4): corrijos formato markdown y bloques mermaid"
-   git push origin main
-
-````
+```
