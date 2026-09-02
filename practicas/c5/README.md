@@ -29,7 +29,7 @@ Para solucionar el problema a nivel de **Capa de Dominio** sin alterar la base d
 
 ## 3. Diagrama de Clases de la Solución
 
-![Solución Herencia Mentirosa](img/liskov_solucion.png)
+![Solución Herencia Mentirosa](../img/liskov_solucion.png)
 
 ```mermaid
 classDiagram
