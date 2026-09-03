@@ -69,3 +69,65 @@ classDiagram
     Bulto <|-- BultoLiquidoGranel : hereda
     Volumetricable <|.. BultoEstandar : implementa
 ```
+
+## 4. Aplicación de la Letra I (Segregación de Interfaces en Roles - RF4)
+
+> _"Una interfaz es un CONTRATO, dice QUÉ métodos tendrá una clase sin decir CÓMO. El hijo honra el contrato del padre (L) y nadie firma lo que no puede cumplir (I)."_
+
+### Identificación del Candidato (Clase de Servicio / Usuario)
+
+Si usáramos un contrato de servicio único (`IServicioAWB`), obligaríamos a los clientes externos a depender de métodos de administración o auditoría interna.
+
+### Solución Aplicada (Contratos por Capacidad)
+
+Segregamos la API en interfaces pequeñas según el principio RBAC:
+
+- **`IConsultorReserva` (Cliente / Forwarder):** Solo firma cotización, reserva y rastreo AWB.
+- **`IOperadorCarga` (Personal Operativo):** Firma programación de vuelos, flotas y eventos.
+- **`IAdministradorSistema` (Admin Global):** Firma gestión de compañías, usuarios y roles.
+
+![Contratos de Roles RF4](../img/contratos_roles_isp.png)
+
+```mermaid
+classDiagram
+    class IConsultorReserva {
+        <<interface>>
+        +consultarRutasDisponibles()
+        +solicitarCotizacion()
+        +realizarReserva()
+        +rastrearGuiaAWB()
+    }
+
+    class IOperadorCarga {
+        <<interface>>
+        +programarVuelo()
+        +administrarFlota()
+        +ajustarTarifarioDinamico()
+        +registrarEventoOperacional()
+    }
+
+    class IAdministradorSistema {
+        <<interface>>
+        +gestionarCompania()
+        +administrarUsuario()
+        +asignarRolRBAC()
+    }
+
+    class ServicioGestionAWB {
+        +consultarRutasDisponibles()
+        +solicitarCotizacion()
+        +realizarReserva()
+        +rastrearGuiaAWB()
+        +programarVuelo()
+        +administrarFlota()
+        +ajustarTarifarioDinamico()
+        +registrarEventoOperacional()
+        +gestionarCompania()
+        +administrarUsuario()
+        +asignarRolRBAC()
+    }
+
+    IConsultorReserva <|.. ServicioGestionAWB
+    IOperadorCarga <|.. ServicioGestionAWB
+    IAdministradorSistema <|.. ServicioGestionAWB
+```
