@@ -1,8 +1,3 @@
-Aquí tienes el contenido **exacto y completo** listo para copiar y pegar dentro de tu archivo `h2/README.md`.
-
-Crea el archivo `README.md` dentro de la carpeta `h2/` y pega este bloque tal cual:
-
-````markdown
 # Hitos de Arquitectura 2 (H2): Refactorización SOLID - Sistema Air Cargo (AWB)
 
 Este entregable documenta la evolución de la arquitectura del sistema de reservas y rastreo de carga aérea (_Air Cargo / AWB_), pasando de un modelo inicial monolítico y acoplado (H1) a una arquitectura modular y mantenible guiada por los principios **SOLID**.
