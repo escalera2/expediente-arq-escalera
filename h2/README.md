@@ -41,14 +41,12 @@ classDiagram
 
     ReservaGuia ..> PostgresDB : instancianew
 ```
-````
-
----
 
 ## 2. Diagrama DESPUÉS (Modelo Arquitectónico Final con SOLID Aplicado)
 
 El sistema refactorizado se organiza en 5 módulos desacoplados (_namespaces_), con contratos explícitos (`<<interface>>`), clases abstractas y desacoplamiento de persistencia.
-![Diagrama Antes - Problemas de Diseño](./img/diagrama_completo_despues.png)
+
+![Diagrama Después - SOLID Completo](./img/diagrama_completo_despues.png)
 
 ```mermaid
 classDiagram
