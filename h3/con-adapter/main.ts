@@ -12,5 +12,5 @@ const servicioSeguimiento: SeguimientoVueloService = new FlightAwareAdapter(
 
 const estado = servicioSeguimiento.obtenerEstadoVuelo("OB-301");
 
-console.log("Estado de vuelo traducido al dominio Air Cargo:");
+console.log("--- Prueba de Patrón Adapter (FlightAware) ---");
 console.log(estado);
