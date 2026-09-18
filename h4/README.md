@@ -1,8 +1,3 @@
-### Versión Definitiva para `h4/README.md`
-
-Puedes copiar este bloque tal cual:
-
-````markdown
 # C4 del caso AIR CARGO — Sistema de Gestión de Carga Aérea (H4 - Parte B)
 
 Este archivo contiene la documentación de arquitectura del sistema **Air Cargo**, modelada mediante los Niveles 1 y 2 del estándar C4 en sintaxis Mermaid.
@@ -22,7 +17,7 @@ flowchart TB
 
     flightaware["SDK FlightAware<br>(radar externo de vuelos)"]
     pasarela["Pasarela de Pagos Online<br>(externa)"]
-    notificador["Servicio WhatsApp / Email<br>(externo)"]
+    notificador["Servicio de Correo Corporativo<br>(SMTP / Email Externo)"]
 
     cliente -->|"solicita cotización y reserva"| sistema
     operador -->|"actualiza estado de vuelos y carga"| sistema
@@ -31,19 +26,22 @@ flowchart TB
     sistema -->|"consulta telemetría de vuelo"| flightaware
     sistema -->|"envía alertas de llegada/vencimiento"| notificador
     notificador -->|"entrega notificación"| cliente
+
 ```
-````
 
 ### Descripción del Entorno
 
-- **Actores del Sistema:**
-- **Cliente / Importador:** Usuario que solicita la cotización, agrega servicios adicionales a su carga y consulta el estado del envío.
-- **Operador Logístico:** Usuario interno encargado del itinerario de vuelos, asignación de guías aéreas (AWB) y actualización de estados.
+* **Actores del Sistema:**
+* **Cliente / Importador:** Usuario que solicita la cotización, agrega servicios adicionales a su carga y consulta el estado del envío.
+* **Operador Logístico:** Usuario interno encargado del itinerario de vuelos, asignación de guías aéreas (AWB) y actualización de estados.
 
-- **Sistemas Externos Integrados:**
-- **SDK FlightAware:** Proveedor de telemetría y radar de vuelo en tiempo real.
-- **Pasarela de Pagos:** Plataforma de procesamiento financiero para el cobro del flete y servicios agregados.
-- **Servicio de Notificaciones:** Canal externo de mensajería (WhatsApp/Email) para avisos automáticos.
+
+* **Sistemas Externos Integrados:**
+* **SDK FlightAware:** Proveedor de telemetría y radar de vuelo en tiempo real.
+* **Pasarela de Pagos:** Plataforma de procesamiento financiero para el cobro del flete y servicios agregados.
+* **Servicio de Correo Corporativo (SMTP):** Canal externo de mensajería para el envío automático de alertas, comprobantes y guías aéreas.
+
+
 
 ---
 
@@ -67,7 +65,7 @@ flowchart TB
     end
 
     flightaware["SDK FlightAware (externo)<br>(conectado con Adapter)"]
-    notificador["Servicio de Notificaciones (externo)"]
+    notificador["Servicio de Correo Corporativo (externo)"]
 
     cliente --> webapp
     operador --> webapp
@@ -75,18 +73,14 @@ flowchart TB
     api --> bd
     api -->|"solicita telemetría"| flightaware
     api -->|"publica eventos de vuelo/vencimiento"| tracking
-    tracking --> notificador
+    tracking -->|"envía correos / alertas"| notificador
 
 ```
 
 ### Mapeo de Componentes e Implementación de Patrones
 
-- **Portal Cargo (Web App):** Interfaz cliente-servidor que expone las pantallas de gestión y cotización.
-- **Lógica de Negocio y Tarificación:** Contenedor donde se ejecuta el cálculo de fletes. Integra los patrones **Strategy** (cálculo de tarifa por peso/volumen/distancia) y **Decorator** (adición dinámica de aditivos como seguros o embalaje frágil).
-- **Módulo de Tracking y Eventos:** Servicio desacoplado que implementa el patrón **Observer** para emitir eventos reactivos cuando un vuelo cambia de estado o vence la reserva.
-- **Integraciones Externas:** Las llamadas hacia FlightAware y Pasarela de Pagos se aíslan mediante el patrón **Adapter**.
-- **Base de Datos:** Almacén persistente estructurado para el registro de guías aéreas (AWB), reservas y clientes.
-
-```
-
-```
+* **Portal Cargo (Web App):** Interfaz cliente-servidor que expone las pantallas de gestión y cotización.
+* **Lógica de Negocio y Tarificación:** Contenedor donde se ejecuta el cálculo de fletes. Integra los patrones **Strategy** (cálculo de tarifa por peso/volumen/distancia) y **Decorator** (adición dinámica de aditivos como seguros o embalaje frágil).
+* **Módulo de Tracking y Eventos:** Servicio desacoplado que implementa el patrón **Observer** para emitir eventos reactivos cuando un vuelo cambia de estado o vence la reserva.
+* **Integraciones Externas:** Las llamadas hacia FlightAware, Pasarela de Pagos y Correo Corporativo se aíslan mediante el patrón **Adapter**.
+* **Base de Datos:** Almacén persistente estructurado para el registro de guías aéreas (AWB), reservas y clientes.
