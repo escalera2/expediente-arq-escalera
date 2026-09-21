@@ -11,14 +11,14 @@ export class ReservaCargaBase implements IReservaCarga {
     public pesoKg: number,
     public volumenM3: number,
     public distanciaKm: number,
-    private estrategiaTarifa: EstrategiaCalculoTarifa
+    private estrategiaTarifa: EstrategiaCalculoTarifa,
   ) {}
 
   obtenerCostoTotal(): number {
     return this.estrategiaTarifa.calcularTarifaBase(
       this.pesoKg,
       this.volumenM3,
-      this.distanciaKm
+      this.distanciaKm,
     );
   }
 

@@ -1,19 +1,14 @@
-import {
-  TarifaPorPeso,
-  TarifaPorVolumen,
-  TarifaPorDistancia
-} from "./EstrategiasTarifa";
+import { TarifaPorVolumen } from "./EstrategiasTarifa";
 import {
   ReservaCargaBase,
   ConSeguroCarga,
   ConEmbalajeEspecial,
   ConCadenaDeFrio,
-  IReservaCarga
+  IReservaCarga,
 } from "./ReservaCarga";
 
 console.log("==========================================================");
 console.log("   SISTEMA AIR CARGO - DEMO FUSIÓN (STRATEGY + DECORATOR)  ");
-console.log("==========================================================");
 
 const awb = "AWB-779-2026";
 const peso = 150;
@@ -27,12 +22,14 @@ let reservaAirCargo: IReservaCarga = new ReservaCargaBase(
   peso,
   volumen,
   distancia,
-  estrategiaTarifa
+  estrategiaTarifa,
 );
 
 console.log("\n[PASO 1: Tarificación Base con Strategy]");
 console.log(`Detalle: ${reservaAirCargo.obtenerDetalle()}`);
-console.log(`Costo Flete Base: $${reservaAirCargo.obtenerCostoTotal().toFixed(2)}`);
+console.log(
+  `Costo Flete Base: $${reservaAirCargo.obtenerCostoTotal().toFixed(2)}`,
+);
 
 console.log("\n[PASO 2: Aplicando Aditivos Opcionales con Decorator]");
 
@@ -43,5 +40,7 @@ reservaAirCargo = new ConCadenaDeFrio(reservaAirCargo);
 console.log(`\nResumen Final de la Reserva:`);
 console.log(`Detalle de Servicios: ${reservaAirCargo.obtenerDetalle()}`);
 console.log(`----------------------------------------------------------`);
-console.log(`COSTO TOTAL A COBRAR: $${reservaAirCargo.obtenerCostoTotal().toFixed(2)}`);
+console.log(
+  `COSTO TOTAL A COBRAR: $${reservaAirCargo.obtenerCostoTotal().toFixed(2)}`,
+);
 console.log("==========================================================");
